@@ -1,0 +1,15 @@
+.features-container {
+  text-align: center;
+  width: 90%;
+  margin: 5em auto;
+}
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.features-container h2 {
+  font-size: 30px;
+  margin-bottom: 50px;
+}

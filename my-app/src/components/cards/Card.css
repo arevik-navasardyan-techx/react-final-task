@@ -1,0 +1,28 @@
+.card-container {
+  background-color: var(--light-grey);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px var(--shadow);
+  padding: 20px;
+  width: auto;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-container p {
+  font-size: 18px;
+  color: var(--gray);
+}
+.card-container svg {
+  stroke: var(--blue);
+  width: 60px;
+  height: 60px;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    width: 100%;
+  }
+}

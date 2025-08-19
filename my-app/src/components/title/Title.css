@@ -1,0 +1,21 @@
+.title-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 7em auto 3em;
+  width: 60%;
+}
+
+.title-container h1 {
+  color: var(--black);
+  font-size: 50px;
+  text-align: center;
+}
+
+.title-container p {
+  color: var(--gray);
+  margin: 0;
+  font-size: 25px;
+  text-align: center;
+}

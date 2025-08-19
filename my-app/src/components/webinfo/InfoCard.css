@@ -1,0 +1,14 @@
+.number {
+  color: var(--blue);
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 15px;
+}
+.info-card {
+  margin-bottom: 11em;
+}
+
+.info-card p {
+  font-size: 18px;
+  color: var(--gray);
+}
