@@ -8,7 +8,9 @@
   --black: black;
   --white: white;
   --light-grey: #fafafa;
+  --background-black: rgba(0, 0, 0, 0.6);
   --shadow: rgba(0, 0, 0, 0.1);
   --blue: oklch(64.6% 0.222 264.376);
   --gray: #666;
+  --red: red;
 }

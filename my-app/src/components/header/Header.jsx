@@ -5,15 +5,11 @@ import Button from "../button/Button";
 
 import "./Header.css";
 
-export default function Header({ email }) {
-  const { logout, login } = useContext(UserContext);
+export default function Header({ email, onLoginClick }) {
+  const { logout } = useContext(UserContext);
   const handleLogout = () => {
     logout();
     // navigate("/");
-  };
-  const handleLogIn = () => {
-    login();
-    // navigate()
   };
 
   return (
@@ -81,7 +77,7 @@ export default function Header({ email }) {
             <div className="right-side">
               <Button
                 btnContent="Login"
-                btnFunction={handleLogIn}
+                btnFunction={onLoginClick}
                 classname="log in"
               ></Button>
             </div>

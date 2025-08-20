@@ -1,16 +1,38 @@
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/ContextProvider";
+
 import Title from "../../components/title/Title";
 import Button from "../../components/button/Button";
 import Header from "../../components/header/Header";
 import Features from "../../components/features/Features";
 import InfoSection from "../../components/bottom section/InfoSection";
 import SignInModal from "../../components/signInModal/SignInModal";
+import CreateQuiz from "../../components/createQuiz/CreateQuiz";
 
 import "./Home.css";
 
 export default function Home() {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const { user } = useContext(UserContext);
+
+  const handleLoginClick = () => {
+    if (!user) {
+      setShowLoginModal(true);
+    }
+  };
+
+  const handleCreateClick = () => {
+    if (user) {
+      setShowCreateModal(true);
+    } else {
+      setShowLoginModal(true);
+    }
+  };
+
   return (
     <div className="home-container">
-      <Header email="lll@ggg"></Header>
+      <Header email={user?.email} onLoginClick={handleLoginClick}></Header>
       <div className="upper-section">
         <Title
           mainText="Enterprise AI Quiz Platform"
@@ -19,6 +41,7 @@ export default function Home() {
         <Button
           btnContent="Create Quiz"
           classname="btn-create-quiz"
+          btnFunction={handleCreateClick}
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +62,14 @@ export default function Home() {
         ></Button>
         <Features></Features>
         <InfoSection></InfoSection>
-        <SignInModal></SignInModal>
       </div>
+
+      {showLoginModal && (
+        <SignInModal onClose={() => setShowLoginModal(false)} />
+      )}
+      {showCreateModal && (
+        <CreateQuiz onClose={() => setShowCreateModal(false)} />
+      )}
     </div>
   );
 }

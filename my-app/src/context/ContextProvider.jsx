@@ -4,6 +4,7 @@ export const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [quizSettings, setQuizSettings] = useState(null);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("currentUser");
@@ -13,8 +14,6 @@ export function UserProvider({ children }) {
   }, []);
 
   function login(userInfo) {
-    localStorage.setItem("currentUser", JSON.stringify(userInfo));
-    setUser(userInfo);
     const newUser = { ...userInfo, id: Date.now() };
     localStorage.setItem("currentUser", JSON.stringify(newUser));
     setUser(newUser);
@@ -26,8 +25,15 @@ export function UserProvider({ children }) {
     setUser(null);
   }
 
+  function saveQuizSettings(settings) {
+    setQuizSettings(settings);
+    localStorage.setItem("quizSettings", JSON.stringify(settings));
+  }
+
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider
+      value={{ user, login, logout, quizSettings, saveQuizSettings }}
+    >
       {children}
     </UserContext.Provider>
   );
