@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/ContextProvider";
 
 import Button from "../button/Button";
@@ -10,15 +11,18 @@ import "./CreateQuiz.css";
 export default function CreateQuiz({ onClose }) {
   const { saveQuizSettings } = useContext(UserContext);
   const [topic, setTopic] = useState("");
-  const [language, setLanguage] = useState("");
-  const [questions, setQuestions] = useState("");
-  const [difficulty, setDifficulty] = useState("");
+  const [language, setLanguage] = useState("English");
+  const [questions, setQuestions] = useState("5");
+  const [difficulty, setDifficulty] = useState("Medium");
   const [requirements, setRequirements] = useState("");
+  const navigate = useNavigate();
 
   const handleGenerate = () => {
     const quizData = { topic, language, questions, difficulty, requirements };
     saveQuizSettings(quizData);
+    navigate("/quiz");
     onClose();
+    // console.log(quizData);
   };
 
   return (
@@ -61,14 +65,9 @@ export default function CreateQuiz({ onClose }) {
         <div className="two-questions">
           <Select
             label="Number of questions"
-            options={[
-              "5 question",
-              "10 question",
-              "15 questions",
-              "20 questions",
-            ]}
-            value={questions}
-            onChange={setQuestions}
+            options={[5, 10, 15, 20].map(String)} // show as strings in UI
+            value={String(questions)}
+            onChange={(val) => setQuestions(Number(val))} // <- convert to number
           ></Select>
           <Select
             label="Difficulty"
