@@ -7,7 +7,7 @@ export function UserProvider({ children }) {
   const [quizSettings, setQuizSettings] = useState(null);
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [chosenAnswers, setChosenAnswers] = useState([]);
-
+  const [quiz, setQuiz] = useState(null);
   useEffect(() => {
     const savedUser = localStorage.getItem("currentUser");
     if (savedUser) {
@@ -40,6 +40,8 @@ export function UserProvider({ children }) {
         logout,
         quizSettings,
         saveQuizSettings,
+        quiz,
+        setQuiz,
         correctAnswers,
         setCorrectAnswers,
         chosenAnswers,

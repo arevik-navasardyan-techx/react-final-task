@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import "./QuizCard.css";
 
 export default function QuizCard({
@@ -9,6 +10,8 @@ export default function QuizCard({
   chosenAnswers,
   setChosenAnswers,
 }) {
+  const navigate = useNavigate();
+
   if (!question || !question.options || question.options.length === 0)
     return null;
 
@@ -23,7 +26,7 @@ export default function QuizCard({
   console.log(chosenAnswers);
   return (
     <div className="quiz-card">
-      <button className="btn-back-home">
+      <button className="btn-back-home" onClick={() => navigate("/")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

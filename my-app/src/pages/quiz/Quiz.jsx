@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/ContextProvider";
 import { API_URL } from "../../key/AI-API-KEY";
 import QuizCard from "../../components/quiz question/QuizCard";
+import QuizResult from "../../components/quiz results/QuizResults";
 
 export default function QuizPage() {
   const {
@@ -16,8 +17,7 @@ export default function QuizPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [current, setCurrent] = useState(0);
-  // const [correctAnswers, setCorrectAnswers] = useState([]);
-  // const [chosenAnswers, setChosenAnswers] = useState([]);
+  const [isQuizFinished, setIsQuizFinished] = useState(false);
 
   useEffect(() => {
     if (!quizSettings) {
@@ -98,12 +98,10 @@ Return JSON in this format ONLY:
     fetchQuiz();
   }, [quizSettings]);
 
-  if (loading) return <p>Generating your quiz...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (!quiz) return <p>No quiz generated</p>;
-
   const handleNext = () => {
-    if (current < quiz.length - 1) {
+    if (current === quiz.length - 1) {
+      setIsQuizFinished(true);
+    } else {
       setCurrent(current + 1);
     }
   };
@@ -114,17 +112,29 @@ Return JSON in this format ONLY:
     }
   };
 
+  if (loading) return <p>Generating your quiz...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!quiz) return <p>No quiz generated</p>;
+
   return (
     <div className="p-6 max-w-2xl mx-auto">
-      <QuizCard
-        question={quiz[current]}
-        index={current}
-        total={quiz.length}
-        onNext={handleNext}
-        onPrev={handlePrev}
-        chosenAnswers={chosenAnswers}
-        setChosenAnswers={setChosenAnswers}
-      />
+      {isQuizFinished ? (
+        <QuizResult
+          quiz={quiz}
+          chosenAnswers={chosenAnswers}
+          difficulty={quizSettings.difficulty}
+        />
+      ) : (
+        <QuizCard
+          question={quiz[current]}
+          index={current}
+          total={quiz.length}
+          onNext={handleNext}
+          onPrev={handlePrev}
+          chosenAnswers={chosenAnswers}
+          setChosenAnswers={setChosenAnswers}
+        />
+      )}
     </div>
   );
 }
