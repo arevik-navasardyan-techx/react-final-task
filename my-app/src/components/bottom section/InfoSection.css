@@ -1,6 +1,6 @@
 .info-section {
-  width: 80%;
-  margin: auto;
   display: flex;
   justify-content: space-between;
+  margin: auto;
+  width: 80%;
 }

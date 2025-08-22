@@ -4,6 +4,7 @@ import { UserProvider } from "./context/ContextProvider.jsx";
 import Home from "./pages/home/Home.jsx";
 import QuizPage from "./pages/quiz/Quiz.jsx";
 import ReviewPage from "./pages/review/ReviewPage.jsx";
+import BrowseQuizzes from "./pages/browse quizes/BrowseQuizzes.jsx";
 
 import "./App.css";
 
@@ -11,6 +12,7 @@ const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/quiz", element: <QuizPage /> },
   { path: "/review", element: <ReviewPage /> },
+  { path: "/search", element: <BrowseQuizzes /> },
 ]);
 
 function App() {

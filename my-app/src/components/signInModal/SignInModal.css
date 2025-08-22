@@ -1,30 +1,30 @@
 .modal-backdrop {
-  position: fixed;
-  inset: 0;
+  align-items: center;
   background: var(--background-black);
   display: flex;
-  align-items: center;
+  inset: 0;
   justify-content: center;
+  position: fixed;
   z-index: 2;
 }
 
 .signin-modal {
   background: var(--white);
-  padding: 2rem;
   border-radius: 10px;
-  width: 500px;
+  padding: 2rem;
   position: relative;
+  width: 500px;
 }
 
 .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  border: none;
   background: none;
-  font-size: 1.5rem;
+  border: none;
   cursor: pointer;
-  stroke: var(--grey);
+  font-size: 1.5rem;
+  position: absolute;
+  right: 15px;
+  stroke: var(--gray);
+  top: 10px;
 }
 
 .btn-sign-in {

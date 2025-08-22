@@ -27,10 +27,22 @@ export function UserProvider({ children }) {
     setUser(null);
   }
 
-  function saveQuizSettings(settings) {
+   const saveQuizSettings = (settings) => {
     setQuizSettings(settings);
-    localStorage.setItem("quizSettings", JSON.stringify(settings));
-  }
+
+    const storedQuizzes = JSON.parse(localStorage.getItem("quizzes") || "[]");
+
+    const quizToStore = {
+      ...settings,
+      createdAt: new Date().toISOString(),
+    };
+
+    localStorage.setItem("quizzes", JSON.stringify([quizToStore, ...storedQuizzes]));
+  };
+
+    const getAllQuizzes = () => {
+    return JSON.parse(localStorage.getItem("quizzes") || "[]");
+  };
 
   return (
     <UserContext.Provider
@@ -46,6 +58,7 @@ export function UserProvider({ children }) {
         setCorrectAnswers,
         chosenAnswers,
         setChosenAnswers,
+        getAllQuizzes
       }}
     >
       {children}

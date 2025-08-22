@@ -44,26 +44,28 @@
   gap: 10px;
 }
 .search-quiz {
+  align-items: center;
+  background-color: var(--black);
+  border: none;
   display: flex;
   gap: 5px;
-  align-items: center;
 }
 .search-quiz svg {
   stroke: var(--white);
 }
 .log {
   align-items: center;
+  background-color: var(--black);
   border-radius: 4px;
   border: 1px solid var(--white);
-  background-color: var(--black);
   color: var(--white);
   cursor: pointer;
   display: flex;
   font-size: 12px;
   font-weight: bold;
   gap: 5px;
-  padding: 8px 12px;
   margin-left: 10px;
+  padding: 8px 12px;
 }
 
 .log:hover {

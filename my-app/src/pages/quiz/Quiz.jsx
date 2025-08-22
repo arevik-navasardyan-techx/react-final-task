@@ -119,7 +119,7 @@ Return JSON in this format ONLY:
   if (!quiz) return <p>No quiz generated</p>;
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div>
       {isQuizFinished ? (
         <QuizResult
           quiz={quiz}

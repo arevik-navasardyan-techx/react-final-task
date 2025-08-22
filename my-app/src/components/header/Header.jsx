@@ -1,15 +1,17 @@
 import { useContext } from "react";
-import { UserContext } from "../../context/ContextProvider";
+import { useNavigate } from "react-router-dom";
 
+import { UserContext } from "../../context/ContextProvider";
 import Button from "../button/Button";
 
 import "./Header.css";
 
 export default function Header({ email, onLoginClick }) {
+  const navigate = useNavigate();
   const { logout } = useContext(UserContext);
   const handleLogout = () => {
     logout();
-    // navigate("/");
+    navigate("/");
   };
 
   return (
@@ -47,7 +49,7 @@ export default function Header({ email, onLoginClick }) {
           {email ? (
             <div className="right-side">
               <div className="right-text">
-                <div className="search-quiz">
+                <button className="search-quiz" onClick={() => navigate("/search")}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -64,7 +66,7 @@ export default function Header({ email, onLoginClick }) {
                     <path d="m21 21-4.3-4.3"></path>
                   </svg>
                   <p className="search-text">Browse Quizzes</p>
-                </div>
+                </button>
                 <p>Welcome, {email}</p>
               </div>
               <Button

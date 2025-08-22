@@ -33,6 +33,6 @@
 }
 
 .input-container input::placeholder {
-  font-size: 14px;
   color: var(--gray);
+  font-size: 14px;
 }

@@ -30,7 +30,6 @@ export default function CreateQuiz({ onClose }) {
     saveQuizSettings(quizData);
     navigate(`/quiz?id=${quizId}`);
     onClose();
-    // console.log(quizData);
   };
 
   return (

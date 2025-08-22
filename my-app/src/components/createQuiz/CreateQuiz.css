@@ -1,9 +1,9 @@
 .create-quiz-container {
   background: var(--white);
-  padding: 2rem;
   border-radius: 10px;
-  width: 500px;
+  padding: 2rem;
   position: relative;
+  width: 500px;
 }
 .create-quiz-container input:focus {
   border-color: var(--blue);
@@ -13,16 +13,16 @@
   justify-content: space-between;
 }
 .btn-generate-quiz {
+  align-items: center;
   background-color: var(--blue);
-  border: none;
   border-radius: 5px;
-  padding: 5px;
+  border: none;
+  color: var(--white);
+  display: flex;
   font-size: 16px;
   font-weight: 800;
-  color: var(--white);
-  width: 100%;
-  display: flex;
   gap: 7px;
-  align-items: center;
   justify-content: center;
+  padding: 5px;
+  width: 100%;
 }
