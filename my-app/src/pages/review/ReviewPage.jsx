@@ -1,6 +1,9 @@
 import { useContext } from "react";
+
 import { UserContext } from "../../context/ContextProvider";
 import ReviewCard from "../../components/review card/ReviewCard";
+
+import "./ReviewPage.css"
 
 export default function ReviewPage() {
   const { quiz, correctAnswers, chosenAnswers, quizSettings } =
@@ -29,22 +32,41 @@ export default function ReviewPage() {
       <div className="review-cards-wrapper">
         {quiz.map((question, i) => (
           <ReviewCard
-            key={i}
-            question={question}
-            userAnswer={chosenAnswers[i]}
-            correctAnswer={correctAnswers[i]}
-            index={i}
-          />
+  key={i}
+  question={question.question}
+  options={question.options}
+  chosenAnswer={chosenAnswers[i]}
+  correctAnswer={correctAnswers[i]}
+  index={i}
+/>
+
         ))}
       </div>
 
       <div className="review-footer">
-        <p>Your Performance</p>
-        <strong>{percentage}%</strong>
-        <p>
-          {correctCount} Correct | {quizLength - correctCount} Incorrect
-        </p>
-      </div>
+  <h3 className="review-footer-title">Your Performance</h3>
+  <div className="review-stats">
+    <div className="review-stat">
+      <p className="review-value review-blue">{percentage}%</p>
+      <p className="review-label">Overall Score</p>
     </div>
+    <div className="review-stat">
+      <p className="review-value review-green">{correctCount}</p>
+      <p className="review-label">Correct</p>
+    </div>
+    <div className="review-stat">
+      <p className="review-value review-red">{quizLength - correctCount}</p>
+      <p className="review-label">Incorrect</p>
+    </div>
+    <div className="review-stat">
+      <p className="review-value">{quizLength}</p>
+      <p className="review-label">Total Questions</p>
+    </div>
+  </div>
+  <p className="review-timestamp">
+    Completed on {new Date().toLocaleString()}
+  </p>
+</div>
+</div>
   );
 }

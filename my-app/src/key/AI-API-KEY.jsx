@@ -3,4 +3,4 @@
 //   "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
 export const API_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyB0y7hdBESH3FlYB5kh2ah0hCwUvD3Jxsk";
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyD-WWSLQ-JN2I84Pa4ioT6u572PX8wy7Aw";

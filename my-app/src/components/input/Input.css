@@ -8,7 +8,7 @@
 
 .input-container label {
   align-items: center;
-  color: var(--gray-medium);
+  color: var(--black);
   display: flex;
   font-size: 17px;
   font-weight: bold;
@@ -33,5 +33,6 @@
 }
 
 .input-container input::placeholder {
-  color: var(--gray-placeholder);
+  font-size: 14px;
+  color: var(--gray);
 }

@@ -11,9 +11,11 @@ export default function QuizPage() {
     setCorrectAnswers,
     chosenAnswers,
     setChosenAnswers,
+    quiz, 
+    setQuiz
   } = useContext(UserContext);
 
-  const [quiz, setQuiz] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [current, setCurrent] = useState(0);

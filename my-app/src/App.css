@@ -14,4 +14,12 @@
   --blue: oklch(64.6% 0.222 264.376);
   --gray: #666;
   --red: red;
+  --green: #28a745;
+  --success-bg: #d4edda;
+  --success-text: #155724;
+  --danger-bg: #f8d7da;
+  --danger-text: #721c24;
+  --danger-border: #dc3545;
+  --info-bg: #e7f1ff;
+  --info-border: #007bff;
 }
