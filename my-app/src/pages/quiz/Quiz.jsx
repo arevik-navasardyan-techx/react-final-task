@@ -1,14 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/ContextProvider";
 import { API_URL } from "../../key/AI-API-KEY";
-import QuizQuestion from "../../components/quiz question/QuizQuestion";
+import QuizCard from "../../components/quiz question/QuizCard";
 
 export default function QuizPage() {
-  const { quizSettings } = useContext(UserContext);
+  const {
+    quizSettings,
+    correctAnswers,
+    setCorrectAnswers,
+    chosenAnswers,
+    setChosenAnswers,
+  } = useContext(UserContext);
+
   const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [current, setCurrent] = useState(0);
+  // const [correctAnswers, setCorrectAnswers] = useState([]);
+  // const [chosenAnswers, setChosenAnswers] = useState([]);
 
   useEffect(() => {
     if (!quizSettings) {
@@ -35,6 +44,10 @@ Return JSON in this format ONLY:
     "answer": "string"
   }
 ]
+  example:
+  "question": "Which type of cell lacks a nucleus and membrane-bound organelles?", 
+  "options": ["A. Eukaryotic cell", "B. Prokaryotic cell", "C. Animal cell", "D. Plant cell"], 
+  "answer": "B. Prokaryotic cell"
 `;
 
         const response = await fetch(API_URL, {
@@ -50,8 +63,9 @@ Return JSON in this format ONLY:
         if (!response.ok) throw new Error("Failed to fetch quiz");
 
         const data = await response.json();
-        console.log(data);
+
         const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        console.log(text);
 
         if (!text) {
           setError("No response from AI.");
@@ -59,14 +73,21 @@ Return JSON in this format ONLY:
         }
         console.log(text);
 
-        // const jsonMatch = text.match(/\[.*\]/s);
-        // if (!jsonMatch) {
-        //   setError("AI did not return JSON.");
-        //   return;
-        // }
+        let parsed;
+        try {
+          const cleaned = text
+            .replace(/```json/g, "")
+            .replace(/```/g, "")
+            .trim();
 
-        // const parsedQuiz = JSON.parse(jsonMatch[0]);
-        setQuiz(text);
+          parsed = JSON.parse(cleaned);
+        } catch (e) {
+          throw new Error("Invalid quiz format received");
+        }
+
+        setQuiz(parsed);
+        setCorrectAnswers(parsed.map((q) => q.answer));
+        setChosenAnswers(new Array(parsed.length).fill(null));
       } catch (err) {
         setError(err.message);
       } finally {
@@ -81,24 +102,28 @@ Return JSON in this format ONLY:
   if (error) return <p>Error: {error}</p>;
   if (!quiz) return <p>No quiz generated</p>;
 
-  const handleNext = (answer) => {
-    console.log("User answered:", answer);
-    if (current < quiz.length - 1) setCurrent(current + 1);
-    else alert("Quiz finished!");
+  const handleNext = () => {
+    if (current < quiz.length - 1) {
+      setCurrent(current + 1);
+    }
   };
 
   const handlePrev = () => {
-    if (current > 0) setCurrent(current - 1);
+    if (current > 0) {
+      setCurrent(current - 1);
+    }
   };
 
   return (
-    <div className="p-6">
-      <QuizQuestion
+    <div className="p-6 max-w-2xl mx-auto">
+      <QuizCard
         question={quiz[current]}
         index={current}
         total={quiz.length}
         onNext={handleNext}
         onPrev={handlePrev}
+        chosenAnswers={chosenAnswers}
+        setChosenAnswers={setChosenAnswers}
       />
     </div>
   );

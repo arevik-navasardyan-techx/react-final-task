@@ -5,6 +5,8 @@ export const UserContext = createContext();
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [quizSettings, setQuizSettings] = useState(null);
+  const [correctAnswers, setCorrectAnswers] = useState([]);
+  const [chosenAnswers, setChosenAnswers] = useState([]);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("currentUser");
@@ -32,7 +34,17 @@ export function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, login, logout, quizSettings, saveQuizSettings }}
+      value={{
+        user,
+        login,
+        logout,
+        quizSettings,
+        saveQuizSettings,
+        correctAnswers,
+        setCorrectAnswers,
+        chosenAnswers,
+        setChosenAnswers,
+      }}
     >
       {children}
     </UserContext.Provider>

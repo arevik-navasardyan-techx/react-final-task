@@ -18,9 +18,17 @@ export default function CreateQuiz({ onClose }) {
   const navigate = useNavigate();
 
   const handleGenerate = () => {
-    const quizData = { topic, language, questions, difficulty, requirements };
+    const quizId = Date.now().toString();
+    const quizData = {
+      id: quizId,
+      topic,
+      language,
+      questions,
+      difficulty,
+      requirements,
+    };
     saveQuizSettings(quizData);
-    navigate("/quiz");
+    navigate(`/quiz?id=${quizId}`);
     onClose();
     // console.log(quizData);
   };
