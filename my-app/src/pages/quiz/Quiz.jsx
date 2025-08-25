@@ -3,18 +3,17 @@ import { UserContext } from "../../context/ContextProvider";
 import { API_URL } from "../../key/AI-API-KEY";
 import QuizCard from "../../components/quiz question/QuizCard";
 import QuizResult from "../../components/quiz results/QuizResults";
+import GeneratingQuiz from "../loading/GeneratingQuiz";
 
 export default function QuizPage() {
   const {
     quizSettings,
-    correctAnswers,
     setCorrectAnswers,
     chosenAnswers,
     setChosenAnswers,
-    quiz, 
-    setQuiz
+    quiz,
+    setQuiz,
   } = useContext(UserContext);
-
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -114,7 +113,7 @@ Return JSON in this format ONLY:
     }
   };
 
-  if (loading) return <p>Generating your quiz...</p>;
+  if (loading) return <GeneratingQuiz></GeneratingQuiz>;
   if (error) return <p>Error: {error}</p>;
   if (!quiz) return <p>No quiz generated</p>;
 
